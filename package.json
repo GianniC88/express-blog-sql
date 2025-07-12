@@ -7,7 +7,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GianniC88/express-blog-sql.git"
+    "url": "git+https://github.com/GianniC88/express-blog-sql.git",
+    "start": "node server.js",
+    "watch": "node --watch --env-file=.env server.js"
   },
   "keywords": [],
   "author": "",
