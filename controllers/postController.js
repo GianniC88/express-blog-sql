@@ -1,5 +1,11 @@
 const posts = require('../data/posts')
 
+const connection = require('../db/connection')
+
+
+
+
+
 const index = (req, res) => {
 
 	let filteredPosts = posts;
