@@ -16,5 +16,5 @@ connection.connect(err => {
 	}
 	console.info('connessione avvenuta')
 })
-
+//per collegare al controller
 module.exports = connection

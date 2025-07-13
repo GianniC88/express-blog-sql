@@ -1,34 +1,54 @@
 const posts = require('../data/posts')
-
+//risponde a connection.js
 const connection = require('../db/connection')
 
 
 
 
-
+//index
 const index = (req, res) => {
-
-	let filteredPosts = posts;
-
-
-	if (req.query.tag) {
-		filteredPosts = posts.filter(
-			post => post.tags.includes(req.query.tag)
-		);
-	}
+	const sql = 'SELECT * FROM posts'
+	connection.query(sql, (err, results) => {
+		if (err) return res.status(500).json({ error: 'database query failed' });
+		res.json(results);
+		console.log(err)
+		console.log(results)
+	})
 
 
-	res.json(filteredPosts); {
-		index
-	}
+	/*
+		let filteredPosts = posts;
+		if (req.query.tag) {
+			filteredPosts = posts.filter(
+				post => post.tags.includes(req.query.tag)
+			);
+		}
+		res.json(filteredPosts); {
+			index
+		}
+	*/
 
 }
 
 
+
+
+
 const show = (req, res) => {
+
+	//recupero id 
+	const id = req.params.id
+
+	const sql = 'SELECT * FORM posts WHERE ID = ?';
+	connection.query(sql, [id], (err, results) => {
+		if (err) return res.status(500).json({ error: 'database query failde' });
+		if (results.length === 0) return res.status(404).json({ error: 'post non found' });
+		res.json(result[0]);
+	});
+
+	/*
 	//recuperiamo l'id dall'URL e trasformiamolo in numero
 	const id = parseInt(req.params.id)
-
 	//cerchiamo il post tramite id
 	const post = posts.find(post => post.id === id);
 	//errore 404 se il post non è presente
@@ -41,6 +61,7 @@ const show = (req, res) => {
 	}
 	//restituiamo sotto forma di JASON
 	res.json(post);
+	*/
 }
 
 
